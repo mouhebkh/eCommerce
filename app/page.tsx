@@ -1,10 +1,11 @@
+import HomeBanner from "@/components/HomeBanner";
 import Container from "../app/../components/Container";
 
 export default function Home() {
   return (
     <div>
-      <Container>
-        <h2>Tulos eCommerce Website</h2>
+      <Container className="py-10">
+        <HomeBanner />
       </Container>
     </div>
   );
