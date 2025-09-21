@@ -2,7 +2,6 @@ import React from "react";
 import Title from "./Title";
 
 // men&apos;s
-
 const HomeBanner = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-5">
