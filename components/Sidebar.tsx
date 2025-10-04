@@ -6,6 +6,8 @@ import { X } from "lucide-react";
 import Link from "next/link";
 import { headerData } from "@/constants";
 import { usePathname } from "next/navigation";
+import SocialMedia from "./SocialMedia";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -13,9 +15,10 @@ interface SidebarProps {
 }
 const Sidebar: FC<SidebarProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname();
+  const sidebarRef = useOutsideClick<HTMLDivElement>(onClose);
   return (
     <div
-      className={`fixed inset-y-0 left-0 z-50 bg-black/50 shadow-xl w-full ${
+      className={`fixed inset-y-0 left-0 z-50 bg-black/50 cursor-auto shadow-xl w-full ${
         isOpen ? "translate-x-0 " : " -translate-x-full"
       }`}
     >
@@ -23,6 +26,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, delay: 0.3 }}
+        ref={sidebarRef}
         className="min-w-72 max-w-96 bg-black text-white/70
        h-full p-10 border-r border-r-white flex flex-col gap-6"
       >
@@ -40,7 +44,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose }) => {
             <Link
               key={item?.title}
               href={item?.href}
-              className={`hover:text-white hoveEffect relative group ${
+              className={`hover:text-white hoveEffect relative group bg-red-300 w-24  ${
                 pathname === item?.href && "text-white"
               }`}
             >
@@ -48,6 +52,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose }) => {
             </Link>
           ))}
         </div>
+        <SocialMedia />
       </motion.div>
     </div>
   );
